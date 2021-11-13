@@ -1,7 +1,7 @@
 namespace Data_Structures
 {
-    class Single_Link_List
-    {
-        
-    }
+	class Single_Link_List
+	{
+
+	}
 }
