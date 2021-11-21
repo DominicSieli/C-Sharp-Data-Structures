@@ -21,7 +21,7 @@ namespace DataStructures
 		{
 			foreach(var data in list)
 			{
-				InsertHead(data);
+				InsertTail(data);
 			}
 		}
 
@@ -167,6 +167,28 @@ namespace DataStructures
 			count--;
 			tail = node;
 			tail.next = null;
+		}
+
+		public void Delete(T data)
+		{
+			if(head == null) return;
+
+			Node node = head;
+			Node previous = null;
+
+			while(node != null)
+			{
+				if(node == head && node.data.Equals(data)) {DeleteHead(); node = head; previous = null;}
+
+				if(node.data.Equals(data))
+				{
+					//node.next = next.next;
+					//previous.next = node.next;
+				}
+
+				previous = node;
+				node = node.next;
+			}
 		}
 	}
 }
