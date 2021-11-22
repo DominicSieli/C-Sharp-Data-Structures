@@ -123,10 +123,8 @@ namespace DataStructures
 			tail.next.previous = null;
 		}
 
-		public void Delete(T data)
+		public void Remove(T data)
 		{
-			if(head == null) return;
-
 			Node node = head;
 
 			while(node != null)

@@ -8,7 +8,7 @@ namespace DataStructures
 		public Graph()
 		{}
 
-		public Graph(List<T> list)
+		public Graph(T[] list)
 		{
 			foreach(var node in list)
 			{

@@ -169,24 +169,19 @@ namespace DataStructures
 			tail.next = null;
 		}
 
-		public void Delete(T data)
+		public void Remove(T data)
 		{
-			if(head == null) return;
-
 			Node node = head;
-			Node previous = null;
 
 			while(node != null)
 			{
-				if(node == head && node.data.Equals(data)) {DeleteHead(); node = head; previous = null;}
+				if(node == head && node.data.Equals(data)) {DeleteHead(); node = head;}
 
-				if(node.data.Equals(data))
+				if(node.next != null && node.next.data.Equals(data))
 				{
-					//node.next = next.next;
-					//previous.next = node.next;
+					node.next = node.next.next;
 				}
 
-				previous = node;
 				node = node.next;
 			}
 		}
