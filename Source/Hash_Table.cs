@@ -1,35 +1,39 @@
-using System;
 using System.Collections.Generic;
 
 namespace DataStructures
 {
 	public class HashTable<T>
 	{
-		private static int S = 10;
+		private static uint SIZE = 1000;
 
 		private class Pair
 		{
 			public T data;
 			public string key;
 
-			public Pair(string k, T d)
+			public Pair(string key, T data)
 			{
-				key = k;
-				data = d;
+				this.key = key;
+				this.data = data;
 			}
 		}
 
-		private List<Pair>[] table = new List<Pair>[10];
+		private List<Pair>[] table = new List<Pair>[SIZE];
 
 		public HashTable()
-		{}
+		{
+			for(uint i = 0; i < SIZE; i++)
+			{
+				table[i] = new List<Pair>();
+			}
+		}
 
 		~HashTable()
 		{}
 
 		public void Insert(string key, T data)
 		{
-			int hash = HashFunction(key);
+			uint hash = HashFunction(key);
 
 			foreach(var pair in table[hash])
 			{
@@ -41,7 +45,7 @@ namespace DataStructures
 
 		public T GetData(string key)
 		{
-			int hash = HashFunction(key);
+			uint hash = HashFunction(key);
 
 			foreach(var pair in table[hash])
 			{
@@ -53,34 +57,32 @@ namespace DataStructures
 
 		public void Remove(string key)
 		{
-			int hash = HashFunction(key);
+			T data = GetData(key);
+			uint hash = HashFunction(key);
 
-			foreach(var pair in table[hash])
-			{
-				if(pair.key == key) {table[hash].Remove(pair); return;}
-			}
+			table[hash].RemoveAll(pair => pair.key == key && pair.data.Equals(data));
 		}
 
 		public bool Empty()
 		{
-			for(int i = 0; i < S; i++)
+			foreach(var pair in table)
 			{
-				if(table[i].Count > 0) return false;
+				if(pair.Count > 0) return false;
 			}
 
 			return true;
 		}
 
-		private int HashFunction(string key)
+		private uint HashFunction(string key)
 		{
-			int hash = 0;
+			uint hash = 0;
 
 			foreach(var chr in key)
 			{
-				hash += (int)chr;
+				hash += (uint)chr;
 			}
 
-			return hash % S;
+			return hash % SIZE;
 		}
 	}
 }
